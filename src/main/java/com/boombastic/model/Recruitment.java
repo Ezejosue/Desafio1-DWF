@@ -3,13 +3,15 @@ package com.boombastic.model;
 public class Recruitment {
 
     private int id;
-    private int id_dept;
-    private int id_employee;
-    private int id_position;
+    private String deptName;
+    private String employeeName;
+    private String positionName;
+    private TypeRecruitment typeRecruitment;
     private String date_recr;
     private double salary;
     private boolean status;
 
+    // Getters y setters
     public int getId() {
         return id;
     }
@@ -18,28 +20,36 @@ public class Recruitment {
         this.id = id;
     }
 
-    public int getId_dept() {
-        return id_dept;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setId_dept(int id_dept) {
-        this.id_dept = id_dept;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
-    public int getId_employee() {
-        return id_employee;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setId_employee(int id_employee) {
-        this.id_employee = id_employee;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
-    public int getId_position() {
-        return id_position;
+    public String getPositionName() {
+        return positionName;
     }
 
-    public void setId_position(int id_position) {
-        this.id_position = id_position;
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    public TypeRecruitment getTypeRecruitment() {
+        return typeRecruitment;
+    }
+
+    public void setTypeRecruitment(TypeRecruitment typeRecruitment) {
+        this.typeRecruitment = typeRecruitment;
     }
 
     public String getDate_recr() {
