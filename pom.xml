@@ -6,8 +6,8 @@
 
     <groupId>com.boombastic</groupId>
     <artifactId>primer</artifactId>
-    <version>1.1-SNAPSHOT</version>
-    <name>primer</name>
+    <version>1</version>
+    <name>SYSTEM</name>
     <packaging>war</packaging>
 
     <properties>
@@ -43,9 +43,9 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
         <dependency>
-            <groupId>jakarta.servlet.jsp.jstl</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-            <version>3.0.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
