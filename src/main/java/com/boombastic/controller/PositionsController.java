@@ -1,8 +1,9 @@
 package com.boombastic.controller;
 
-import com.boombastic.config.DBConnection;
 import com.boombastic.dao.DepartmentDAO;
+import com.boombastic.dao.PositionDAO;
 import com.boombastic.model.Department;
+import com.boombastic.model.Position;
 import com.boombastic.model.Recruitment;
 import com.boombastic.model.TypeRecruitment;
 import jakarta.servlet.ServletException;
@@ -12,14 +13,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "DepartmentsController", value = "/departments")
-public class DepartmentController extends HttpServlet {
+@WebServlet(name = "PositionsController", value = "/positions")
+public class PositionsController extends HttpServlet {
 
-    private DepartmentDAO departmentDao = new DepartmentDAO();
+    private PositionDAO positionDao = new PositionDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +26,7 @@ public class DepartmentController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action == null) {
-            listDepartments(request, response);
+            listPositions(request, response);
         } else if (action.equals("add")) {
 
         } else if (action.equals("edit")) {
@@ -37,11 +36,11 @@ public class DepartmentController extends HttpServlet {
         }
     }
 
-    private void listDepartments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listPositions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Department> departmentsList = departmentDao.getAllDepartments();
-        request.setAttribute("departmentsList", departmentsList);
-        request.getRequestDispatcher("views/departmentsList.jsp").forward(request, response);
+        List<Position> positionsList = positionDao.getAllPositions();
+        request.setAttribute("positionsList", positionsList);
+        request.getRequestDispatcher("views/positionsList.jsp").forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +48,7 @@ public class DepartmentController extends HttpServlet {
         request.getRequestDispatcher("views/departmentsForm.jsp").forward(request, response);
     }
 
-    private void saveDepartment(HttpServletRequest request, HttpServletResponse response)
+    private void savePositions(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Recoge los datos del formulario
         String deptName = request.getParameter("deptName");
