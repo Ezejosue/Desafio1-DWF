@@ -77,6 +77,18 @@ public class RecruitmentDAO {
         }
     }
 
+    public void delete(int id) {
+        String sql = "DELETE FROM Contrataciones WHERE idContratacion = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Métodos auxiliares para convertir nombres a IDs (implementación pendiente)
     private int getDepartmentIdByName(String deptName) {
         int id = 0;

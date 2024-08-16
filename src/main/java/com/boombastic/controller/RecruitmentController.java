@@ -1,6 +1,8 @@
 package com.boombastic.controller;
 
+import com.boombastic.dao.DepartmentDAO;
 import com.boombastic.dao.RecruitmentDAO;
+import com.boombastic.model.Department;
 import com.boombastic.model.Recruitment;
 import com.boombastic.model.TypeRecruitment;
 import jakarta.servlet.ServletException;
@@ -15,8 +17,13 @@ import java.util.List;
 @WebServlet(name = "RecruitmentController", value = "/recruitment")
 public class RecruitmentController extends HttpServlet {
     private RecruitmentDAO recruitmentDAO = new RecruitmentDAO();
+    private DepartmentDAO departmentDAO = new DepartmentDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Aplicar encoding UTF-8 para guardar caracteres especiales en la base de datos
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String action = request.getParameter("action");
 
         if (action == null || action.equals("list")) {
@@ -24,7 +31,7 @@ public class RecruitmentController extends HttpServlet {
         } else if (action.equals("edit")) {
             // Lógica para editar una contratación
         } else if (action.equals("delete")) {
-            // Lógica para eliminar una contratación
+            deleteRecruitment(request, response);
         } else if (action.equals("new")) {
             showNewForm(request, response);
         } else if (action.equals("save")) {
@@ -42,6 +49,9 @@ public class RecruitmentController extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<Department> departmentList = departmentDAO.getAllDepartments();
+
+        request.setAttribute("departmentList", departmentList);
         request.getRequestDispatcher("views/recruitmentForm.jsp").forward(request, response);
     }
 
@@ -73,6 +83,12 @@ public class RecruitmentController extends HttpServlet {
         recruitmentDAO.save(recruitment);
 
         // Redirigir a la lista de contrataciones
+        response.sendRedirect("recruitment?action=list");
+    }
+
+    private void deleteRecruitment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        recruitmentDAO.delete(id);
         response.sendRedirect("recruitment?action=list");
     }
 

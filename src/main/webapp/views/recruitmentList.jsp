@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -35,8 +35,9 @@
                 <td>${recruitment.salary}</td>
                 <td>${recruitment.status ? 'Activo' : 'Inactivo'}</td>
                 <td>
-                    <a href="RecruitmentController?action=edit&id=${recruitment.id}" class="btn btn-primary">Editar</a>
-                    <a href="RecruitmentController?action=delete&id=${recruitment.id}" class="btn btn-danger">Eliminar</a>
+                    <a href="recruitment?action=edit&id=${recruitment.id}" class="btn btn-primary">Editar</a>
+                    <a href="recruitment?action=delete&id=${recruitment.id}" class="btn btn-danger"
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar esta contratación?');">Eliminar</a>
                 </td>
             </tr>
         </c:forEach>

@@ -6,8 +6,8 @@
 
     <groupId>com.boombastic</groupId>
     <artifactId>primer</artifactId>
-    <version>1</version>
-    <name>SYSTEM</name>
+    <version>1.1-SNAPSHOT</version>
+    <name>primer</name>
     <packaging>war</packaging>
 
     <properties>
