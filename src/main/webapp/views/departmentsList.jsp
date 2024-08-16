@@ -3,39 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Contrataciones</title>
+    <title>Lista de Departamentos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 <div class="container">
-    <h2>Lista de Contrataciones</h2>
+    <h2>Lista de departamentos</h2>
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Departamento</th>
-            <th>Empleado</th>
-            <th>Cargo</th>
-            <th>Tipo de Contratación</th>
-            <th>Fecha de Contratación</th>
-            <th>Salario</th>
-            <th>Estado</th>
+            <th>ID</th>
+            <th>Nombre departamento</th>
+            <th>Descripción departamento</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="recruitment" items="${recruitmentList}">
+        <c:forEach var="dept" items="${departmentsList}">
             <tr>
-                <td>${recruitment.deptName}</td>
-                <td>${recruitment.employeeName}</td>
-                <td>${recruitment.positionName}</td>
-                <td>${recruitment.typeRecruitment.type_recr}</td>
-                <td>${recruitment.date_recr}</td>
-                <td>${recruitment.salary}</td>
-                <td>${recruitment.status ? 'Activo' : 'Inactivo'}</td>
+                <td>${dept.id}</td>
+                <td>${dept.dept_name}</td>
+                <td>${dept.dept_description}</td>
                 <td>
-                    <a href="RecruitmentController?action=edit&id=${recruitment.id}" class="btn btn-primary">Editar</a>
-                    <a href="RecruitmentController?action=delete&id=${recruitment.id}" class="btn btn-danger">Eliminar</a>
+                    <a href="DepartmentController?action=edit&id=${dept.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                    <a href="DepartmentController?action=delete&id=${dept.id}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                 </td>
             </tr>
         </c:forEach>

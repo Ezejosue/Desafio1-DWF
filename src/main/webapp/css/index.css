@@ -1,0 +1,21 @@
+.grid-item {
+    display: block;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 40px;
+    margin: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: #343a40;
+    font-size: 24px;
+    font-weight: bold;
+}
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    background-color: #82F1FF;
+    text-decoration: none;
+}
