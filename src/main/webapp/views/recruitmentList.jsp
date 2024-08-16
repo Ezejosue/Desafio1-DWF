@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container">
+    <a href="recruitment?action=new" class="btn btn-success">Nueva Contratación</a>
     <h2>Lista de Contrataciones</h2>
     <table class="table table-bordered">
         <thead>
