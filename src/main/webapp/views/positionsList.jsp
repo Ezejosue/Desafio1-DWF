@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Departamentos</title>
+    <title>Lista de Posiciones</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -14,7 +14,7 @@
         <!-- Centered Title -->
         <div class="row">
             <div class="col text-center">
-                <h1>Lista de departamentos</h1>
+                <h1>Lista de posiciones</h1>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
         <div class="row my-4">
             <div class="col text-center">
                 <a href="departments?action=new" class="btn btn-success">
-                    <i class="bi bi-plus-square-fill"></i> Añadir nuevo departamento
+                    <i class="bi bi-plus-square-fill"></i> Añadir nueva posición
                 </a>
             </div>
         </div>

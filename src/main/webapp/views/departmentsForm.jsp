@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +14,7 @@
 
         <div class="form-group">
             <label for="deptName">Departamento:</label>
-            <select class="form-control" id="deptName" name="deptName" required>
-                <c:forEach var="deparment" items="${departmentList}">
-                    <option value="${deparment.dept_name}">${deparment.dept_name}</option>
-                </c:forEach>
-            </select>
+            <input type="text" class="form-control" id="deptName" name="deptName" required>
         </div>
 
         <div class="form-group">
