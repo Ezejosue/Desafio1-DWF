@@ -1,13 +1,7 @@
 package com.boombastic.controller;
 
-import com.boombastic.dao.DepartmentDAO;
-import com.boombastic.dao.PositionDAO;
-import com.boombastic.dao.RecruitmentDAO;
-import com.boombastic.dao.TypeRecruitmentDAO;
-import com.boombastic.model.Department;
-import com.boombastic.model.Position;
-import com.boombastic.model.Recruitment;
-import com.boombastic.model.TypeRecruitment;
+import com.boombastic.dao.*;
+import com.boombastic.model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +17,10 @@ import java.util.List;
  */
 @WebServlet(name = "RecruitmentController", value = "/recruitment")
 public class RecruitmentController extends HttpServlet {
+
+    // Create DAO objects
     private RecruitmentDAO recruitmentDAO = new RecruitmentDAO();
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
     private PositionDAO positionDAO = new PositionDAO();
     private TypeRecruitmentDAO typeRecruitmentDAO = new TypeRecruitmentDAO();
@@ -84,7 +81,10 @@ public class RecruitmentController extends HttpServlet {
                 listRecruitments(request, response);
                 break;
             case "edit":
-                // Implement edit functionality
+                setEditRecruitmentValues(request, response);
+                break;
+            case "update":
+                updateRecruitment(request, response);
                 break;
             case "delete":
                 deleteRecruitment(request, response);
@@ -139,9 +139,11 @@ public class RecruitmentController extends HttpServlet {
         List<Department> departmentList = departmentDAO.getAllDepartments();
         List<Position> positionList = positionDAO.getAllPositions();
         List<TypeRecruitment> typeRecruitmentList = typeRecruitmentDAO.getAllTypeRecruitment();
+        List<Employee> employeeList = employeeDAO.getAllEmployees();
 
 
         request.setAttribute("departmentList", departmentList);
+        request.setAttribute("employeeList", employeeList);
         request.setAttribute("positionList", positionList);
         request.setAttribute("typeRecruitmentList", typeRecruitmentList);
         request.getRequestDispatcher("views/recruitmentForm.jsp").forward(request, response);
@@ -185,6 +187,67 @@ public class RecruitmentController extends HttpServlet {
 
         // Guardar la contratación (puedes implementar la lógica en el DAO)
         recruitmentDAO.save(recruitment);
+
+        // Redirigir a la lista de contrataciones
+        response.sendRedirect("recruitment?action=list");
+    }
+
+    private void setEditRecruitmentValues(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Recoge el ID de la contratación a editar
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        // Recoge el nombre del empleado
+        String employeeName = request.getParameter("employeeName");
+
+        // Obtiene la contratación a editar
+        Recruitment recruitment = recruitmentDAO.getRecruitmentById(id);
+
+        // Obtiene la lista de departamentos, posiciones y tipos de contratación
+        List<Department> departmentList = departmentDAO.getAllDepartments();
+        List<Position> positionList = positionDAO.getAllPositions();
+        List<TypeRecruitment> typeRecruitmentList = typeRecruitmentDAO.getAllTypeRecruitment();
+
+        // Envía los datos a la vista
+        request.setAttribute("recruitment", recruitment);
+        request.setAttribute("departmentList", departmentList);
+        request.setAttribute("positionList", positionList);
+        request.setAttribute("typeRecruitmentList", typeRecruitmentList);
+        request.setAttribute("employeeName", employeeName);
+
+        // Redirige a la vista de edición
+        request.getRequestDispatcher("views/recruitmentUpdateForm.jsp").forward(request, response);
+    }
+
+    private void updateRecruitment(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Recoge los datos del formulario
+        int id = Integer.parseInt(request.getParameter("id"));
+        String deptName = request.getParameter("deptName");
+        String employeeName = request.getParameter("employeeName");
+        String positionName = request.getParameter("positionName");
+        String typeRecruitment = request.getParameter("typeRecr");
+        String date_recr = request.getParameter("date_recr");
+        double salary = Double.parseDouble(request.getParameter("salary"));
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+
+        // Crea un nuevo objeto Recruitment
+        Recruitment recruitment = new Recruitment();
+        recruitment.setId(id);
+        recruitment.setDeptName(deptName);
+        recruitment.setEmployeeName(employeeName);
+        recruitment.setPositionName(positionName);
+        recruitment.setDate_recr(date_recr);
+        recruitment.setSalary(salary);
+        recruitment.setStatus(status);
+
+        TypeRecruitment typeRecruitmentObj = new TypeRecruitment();
+        typeRecruitmentObj.setType_recr(typeRecruitment);
+        recruitment.setTypeRecruitment(typeRecruitmentObj);
+
+        System.out.println(recruitment);
+        // Guardar la contratación (puedes implementar la lógica en el DAO)
+        recruitmentDAO.update(recruitment);
 
         // Redirigir a la lista de contrataciones
         response.sendRedirect("recruitment?action=list");
