@@ -24,7 +24,11 @@
 
         <div class="form-group">
             <label for="employeeName">Empleado:</label>
-            <input type="text" class="form-control" id="employeeName" name="employeeName" required>
+            <select class="form-control" id="employeeName" name="employeeName" required>
+                <c:forEach var="employee" items="${employeeList}">
+                    <option value="${employee.emp_name}">${employee.emp_name}</option>
+                </c:forEach>
+            </select>
         </div>
 
         <div class="form-group">

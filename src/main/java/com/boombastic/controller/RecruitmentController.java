@@ -1,13 +1,7 @@
 package com.boombastic.controller;
 
-import com.boombastic.dao.DepartmentDAO;
-import com.boombastic.dao.PositionDAO;
-import com.boombastic.dao.RecruitmentDAO;
-import com.boombastic.dao.TypeRecruitmentDAO;
-import com.boombastic.model.Department;
-import com.boombastic.model.Position;
-import com.boombastic.model.Recruitment;
-import com.boombastic.model.TypeRecruitment;
+import com.boombastic.dao.*;
+import com.boombastic.model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +17,10 @@ import java.util.List;
  */
 @WebServlet(name = "RecruitmentController", value = "/recruitment")
 public class RecruitmentController extends HttpServlet {
+
+    // Create DAO objects
     private RecruitmentDAO recruitmentDAO = new RecruitmentDAO();
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
     private PositionDAO positionDAO = new PositionDAO();
     private TypeRecruitmentDAO typeRecruitmentDAO = new TypeRecruitmentDAO();
@@ -142,9 +139,11 @@ public class RecruitmentController extends HttpServlet {
         List<Department> departmentList = departmentDAO.getAllDepartments();
         List<Position> positionList = positionDAO.getAllPositions();
         List<TypeRecruitment> typeRecruitmentList = typeRecruitmentDAO.getAllTypeRecruitment();
+        List<Employee> employeeList = employeeDAO.getAllEmployees();
 
 
         request.setAttribute("departmentList", departmentList);
+        request.setAttribute("employeeList", employeeList);
         request.setAttribute("positionList", positionList);
         request.setAttribute("typeRecruitmentList", typeRecruitmentList);
         request.getRequestDispatcher("views/recruitmentForm.jsp").forward(request, response);
