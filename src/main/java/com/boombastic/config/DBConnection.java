@@ -4,7 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The `DBConnection` class provides a static method to establish a connection to a MySQL database.
+ */
 public class DBConnection {
+    
+ /**
+  * The function `getConnection` establishes a connection to a MySQL database using JDBC in a Java
+  * application.
+  * 
+  * @return The `getConnection()` method returns a `Connection` object, which represents a connection
+  * to a database.
+  */
     
     public static Connection getConnection() {
         Connection con;

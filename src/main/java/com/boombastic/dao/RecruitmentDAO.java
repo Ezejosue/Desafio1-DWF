@@ -11,8 +11,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The `RecruitmentDAO` class in Java provides methods to interact with a database for recruitment data
+ * including retrieving all recruitments, saving new recruitments, and deleting recruitments by ID.
+ */
 public class RecruitmentDAO {
 
+   /**
+    * The function retrieves all recruitment data from the database and maps it to a list of
+    * Recruitment objects.
+    * 
+    * @return This method returns a list of `Recruitment` objects, which contain information about
+    * different recruitments. The method retrieves data from a database query and populates each
+    * `Recruitment` object with details such as recruitment ID, department name, employee name,
+    * position name, type of recruitment, recruitment date, salary, and status. Finally, it returns a
+    * list containing all the populated `Recruitment` objects
+    */
     public List<Recruitment> getAllRecruitment() {
         List<Recruitment> recruitmentList = new ArrayList<>();
 
@@ -55,6 +69,14 @@ public class RecruitmentDAO {
         return recruitmentList;
     }
 
+   /**
+    * The `save` method inserts recruitment data into a database table by converting names to
+    * corresponding IDs and handling exceptions.
+    * 
+    * @param recruitment The `save` method you provided is responsible for saving recruitment data into
+    * a database. It takes a `Recruitment` object as a parameter. The `Recruitment` class seems to have
+    * properties such as `deptName`, `employeeName`, `positionName`, `typeRecruitment`, `date
+    */
     public void save(Recruitment recruitment) {
         String sql = "INSERT INTO Contrataciones (idDepartamento, idEmpleado, idCargo, idTipoContratacion, fechaContratacion, salario, estado) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -77,6 +99,14 @@ public class RecruitmentDAO {
         }
     }
 
+   /**
+    * The `delete` function deletes a record from the database table `Contrataciones` based on the
+    * provided `id`.
+    * 
+    * @param id The `id` parameter in the `delete` method represents the unique identifier of the
+    * record that you want to delete from the `Contrataciones` table in the database. When calling this
+    * method, you need to pass the specific `id` value of the record that you want to remove from
+    */
     public void delete(int id) {
         String sql = "DELETE FROM Contrataciones WHERE idContratacion = ?";
 
@@ -89,7 +119,7 @@ public class RecruitmentDAO {
         }
     }
 
-    // Métodos auxiliares para convertir nombres a IDs (implementación pendiente)
+   
     private int getDepartmentIdByName(String deptName) {
         int id = 0;
         String sql = "SELECT idDepartamento FROM Departamento WHERE nombreDepartamento = ?";
@@ -106,6 +136,10 @@ public class RecruitmentDAO {
         return id;
     }
 
+    /**
+     * Methods to get the ID of the employee by name, position by name, and type of recruitment by name
+     */
+    
     private int getEmployeeIdByName(String employeeName) {
         int id = 0;
         String sql = "SELECT idEmpleado FROM Empleados WHERE nombrePersona = ?";
