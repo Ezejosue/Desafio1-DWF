@@ -1,8 +1,11 @@
 package com.boombastic.controller;
 
 import com.boombastic.dao.DepartmentDAO;
+import com.boombastic.dao.PositionDAO;
 import com.boombastic.dao.RecruitmentDAO;
+import com.boombastic.dao.TypeRecruitmentDAO;
 import com.boombastic.model.Department;
+import com.boombastic.model.Position;
 import com.boombastic.model.Recruitment;
 import com.boombastic.model.TypeRecruitment;
 import jakarta.servlet.ServletException;
@@ -22,20 +25,22 @@ import java.util.List;
 public class RecruitmentController extends HttpServlet {
     private RecruitmentDAO recruitmentDAO = new RecruitmentDAO();
     private DepartmentDAO departmentDAO = new DepartmentDAO();
+    private PositionDAO positionDAO = new PositionDAO();
+    private TypeRecruitmentDAO typeRecruitmentDAO = new TypeRecruitmentDAO();
 
 
-   /**
-    * The function `processRequest` handles HTTP requests by setting character encoding, retrieving the
-    * action parameter, and calling a method to handle the action.
-    * 
-    * @param request The `HttpServletRequest` object represents the request that a client makes to a
-    * servlet. It contains information about the request such as parameters, headers, and cookies. The
-    * servlet uses this object to read the client's request data.
-    * @param response The `response` parameter in the `processRequest` method is of type
-    * `HttpServletResponse`. It is used to send a response back to the client who made the request.
-    * This response can include data, status codes, headers, and more. It is an essential part of
-    * handling HTTP requests and providing
-    */
+    /**
+     * The function `processRequest` handles HTTP requests by setting character encoding, retrieving the
+     * action parameter, and calling a method to handle the action.
+     *
+     * @param request  The `HttpServletRequest` object represents the request that a client makes to a
+     *                 servlet. It contains information about the request such as parameters, headers, and cookies. The
+     *                 servlet uses this object to read the client's request data.
+     * @param response The `response` parameter in the `processRequest` method is of type
+     *                 `HttpServletResponse`. It is used to send a response back to the client who made the request.
+     *                 This response can include data, status codes, headers, and more. It is an essential part of
+     *                 handling HTTP requests and providing
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
@@ -52,21 +57,21 @@ public class RecruitmentController extends HttpServlet {
 
     }
 
-   /**
-    * The function `handleAction` processes different actions based on a given parameter and calls
-    * corresponding methods to perform tasks such as listing, editing, deleting, creating, or saving
-    * recruitment data.
-    * 
-    * @param action The `action` parameter in the `handleAction` method represents the action that the
-    * servlet should perform. It is used to determine which operation to execute based on the value of
-    * the action parameter passed in the request.
-    * @param request The `HttpServletRequest` object represents the request that a client sends to a
-    * servlet. It contains information about the request such as parameters, headers, and cookies.
-    * @param response The `response` parameter in the `handleAction` method is of type
-    * `HttpServletResponse`. It is used to send a response back to the client that made the request.
-    * This response can include data, status codes, headers, and more. In the provided code snippet,
-    * the `response` parameter
-    */
+    /**
+     * The function `handleAction` processes different actions based on a given parameter and calls
+     * corresponding methods to perform tasks such as listing, editing, deleting, creating, or saving
+     * recruitment data.
+     *
+     * @param action   The `action` parameter in the `handleAction` method represents the action that the
+     *                 servlet should perform. It is used to determine which operation to execute based on the value of
+     *                 the action parameter passed in the request.
+     * @param request  The `HttpServletRequest` object represents the request that a client sends to a
+     *                 servlet. It contains information about the request such as parameters, headers, and cookies.
+     * @param response The `response` parameter in the `handleAction` method is of type
+     *                 `HttpServletResponse`. It is used to send a response back to the client that made the request.
+     *                 This response can include data, status codes, headers, and more. In the provided code snippet,
+     *                 the `response` parameter
+     */
     protected void handleAction(String action, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (action == null) {
@@ -101,14 +106,14 @@ public class RecruitmentController extends HttpServlet {
     /**
      * The function retrieves a list of recruitments from the database and forwards it to a JSP view
      * for display.
-     * 
-     * @param request The `HttpServletRequest` object represents the request that a client sends to a
-     * servlet. It contains information about the client request such as parameters, headers, and
-     * cookies.
+     *
+     * @param request  The `HttpServletRequest` object represents the request that a client sends to a
+     *                 servlet. It contains information about the client request such as parameters, headers, and
+     *                 cookies.
      * @param response The `response` parameter in the `listRecruitments` method is of type
-     * `HttpServletResponse`. It is used to send the response back to the client, typically a web
-     * browser, after processing the request. This response can include data, HTML content, or other
-     * information that the client needs.
+     *                 `HttpServletResponse`. It is used to send the response back to the client, typically a web
+     *                 browser, after processing the request. This response can include data, HTML content, or other
+     *                 information that the client needs.
      */
     private void listRecruitments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Recruitment> recruitmentList = recruitmentDAO.getAllRecruitment();
@@ -117,45 +122,50 @@ public class RecruitmentController extends HttpServlet {
 
     }
 
-   /**
-    * The function `showNewForm` retrieves a list of departments and forwards the request to a
-    * recruitment form JSP view.
-    * 
-    * @param request The `HttpServletRequest` object represents the request that a client sends to a
-    * servlet. It contains information about the client's request such as parameters, headers, and
-    * cookies.
-    * @param response The `response` parameter in the `showNewForm` method is an object of the
-    * `HttpServletResponse` class. It is used to send the response back to the client, typically a web
-    * browser, after processing the request. This response object allows you to set response headers,
-    * cookies, and content
-    */
+    /**
+     * The function `showNewForm` retrieves a list of departments and forwards the request to a
+     * recruitment form JSP view.
+     *
+     * @param request  The `HttpServletRequest` object represents the request that a client sends to a
+     *                 servlet. It contains information about the client's request such as parameters, headers, and
+     *                 cookies.
+     * @param response The `response` parameter in the `showNewForm` method is an object of the
+     *                 `HttpServletResponse` class. It is used to send the response back to the client, typically a web
+     *                 browser, after processing the request. This response object allows you to set response headers,
+     *                 cookies, and content
+     */
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Department> departmentList = departmentDAO.getAllDepartments();
+        List<Position> positionList = positionDAO.getAllPositions();
+        List<TypeRecruitment> typeRecruitmentList = typeRecruitmentDAO.getAllTypeRecruitment();
+
 
         request.setAttribute("departmentList", departmentList);
+        request.setAttribute("positionList", positionList);
+        request.setAttribute("typeRecruitmentList", typeRecruitmentList);
         request.getRequestDispatcher("views/recruitmentForm.jsp").forward(request, response);
     }
 
-   /**
-    * The `saveRecruitment` function in Java retrieves form data, creates a new Recruitment object with
-    * the data, saves it using a DAO, and then redirects to the list of recruitments.
-    * 
-    * @param request The `saveRecruitment` method you provided is used to save recruitment data from a
-    * form submitted via a `HttpServletRequest`. Let me explain the parameters you are extracting from
-    * the request:
-    * @param response The `response` parameter in the `saveRecruitment` method is of type
-    * `HttpServletResponse`. It is used to send a response back to the client (browser) after
-    * processing the request. In this method, `response.sendRedirect("recruitment?action=list");` is
-    * used to redirect the client to
-    */
+    /**
+     * The `saveRecruitment` function in Java retrieves form data, creates a new Recruitment object with
+     * the data, saves it using a DAO, and then redirects to the list of recruitments.
+     *
+     * @param request  The `saveRecruitment` method you provided is used to save recruitment data from a
+     *                 form submitted via a `HttpServletRequest`. Let me explain the parameters you are extracting from
+     *                 the request:
+     * @param response The `response` parameter in the `saveRecruitment` method is of type
+     *                 `HttpServletResponse`. It is used to send a response back to the client (browser) after
+     *                 processing the request. In this method, `response.sendRedirect("recruitment?action=list");` is
+     *                 used to redirect the client to
+     */
     private void saveRecruitment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Recoge los datos del formulario
         String deptName = request.getParameter("deptName");
         String employeeName = request.getParameter("employeeName");
         String positionName = request.getParameter("positionName");
-        String typeRecruitment = request.getParameter("typeRecruitment");
+        String typeRecruitment = request.getParameter("typeRecr");
         String date_recr = request.getParameter("date_recr");
         double salary = Double.parseDouble(request.getParameter("salary"));
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
@@ -183,13 +193,13 @@ public class RecruitmentController extends HttpServlet {
     /**
      * This function deletes a recruitment record based on the provided ID and redirects to the
      * recruitment list page.
-     * 
-     * @param request The `HttpServletRequest` object represents the request that a client makes to a
-     * servlet. It contains information about the request such as parameters, headers, and other data
-     * sent by the client.
+     *
+     * @param request  The `HttpServletRequest` object represents the request that a client makes to a
+     *                 servlet. It contains information about the request such as parameters, headers, and other data
+     *                 sent by the client.
      * @param response The `response` parameter in the `deleteRecruitment` method is an object of the
-     * `HttpServletResponse` class. It is used to send a response back to the client (usually a web
-     * browser) that made the request. In this method, the `response` object is used to redirect the
+     *                 `HttpServletResponse` class. It is used to send a response back to the client (usually a web
+     *                 browser) that made the request. In this method, the `response` object is used to redirect the
      */
     private void deleteRecruitment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));

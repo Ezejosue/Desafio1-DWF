@@ -28,13 +28,21 @@
         </div>
 
         <div class="form-group">
-            <label for="positionName">Cargo:</label>
-            <input type="text" class="form-control" id="positionName" name="positionName" required>
+            <label for="positionName">Posición:</label>
+            <select class="form-control" id="positionName" name="positionName" required>
+                <c:forEach var="position" items="${positionList}">
+                    <option value="${position.position}">${position.position}</option>
+                </c:forEach>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="typeRecruitment">Tipo de Contratación:</label>
-            <input type="text" class="form-control" id="typeRecruitment" name="typeRecruitment" required>
+            <label for="typeRecr">Tipo Contratación:</label>
+            <select class="form-control" id="typeRecr" name="typeRecr" required>
+                <c:forEach var="typeRecruitment" items="${typeRecruitmentList}">
+                    <option value="${typeRecruitment.type_recr}">${typeRecruitment.type_recr}</option>
+                </c:forEach>
+            </select>
         </div>
 
         <div class="form-group">

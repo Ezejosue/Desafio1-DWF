@@ -20,7 +20,7 @@ public class RecruitmentDAO {
    /**
     * The function retrieves all recruitment data from the database and maps it to a list of
     * Recruitment objects.
-    * 
+    *
     * @return This method returns a list of `Recruitment` objects, which contain information about
     * different recruitments. The method retrieves data from a database query and populates each
     * `Recruitment` object with details such as recruitment ID, department name, employee name,
@@ -69,10 +69,11 @@ public class RecruitmentDAO {
         return recruitmentList;
     }
 
+
    /**
     * The `save` method inserts recruitment data into a database table by converting names to
     * corresponding IDs and handling exceptions.
-    * 
+    *
     * @param recruitment The `save` method you provided is responsible for saving recruitment data into
     * a database. It takes a `Recruitment` object as a parameter. The `Recruitment` class seems to have
     * properties such as `deptName`, `employeeName`, `positionName`, `typeRecruitment`, `date
@@ -102,7 +103,7 @@ public class RecruitmentDAO {
    /**
     * The `delete` function deletes a record from the database table `Contrataciones` based on the
     * provided `id`.
-    * 
+    *
     * @param id The `id` parameter in the `delete` method represents the unique identifier of the
     * record that you want to delete from the `Contrataciones` table in the database. When calling this
     * method, you need to pass the specific `id` value of the record that you want to remove from
@@ -119,7 +120,7 @@ public class RecruitmentDAO {
         }
     }
 
-   
+
     private int getDepartmentIdByName(String deptName) {
         int id = 0;
         String sql = "SELECT idDepartamento FROM Departamento WHERE nombreDepartamento = ?";
@@ -139,7 +140,7 @@ public class RecruitmentDAO {
     /**
      * Methods to get the ID of the employee by name, position by name, and type of recruitment by name
      */
-    
+
     private int getEmployeeIdByName(String employeeName) {
         int id = 0;
         String sql = "SELECT idEmpleado FROM Empleados WHERE nombrePersona = ?";
@@ -188,4 +189,5 @@ public class RecruitmentDAO {
         }
         return id;
     }
+
 }
