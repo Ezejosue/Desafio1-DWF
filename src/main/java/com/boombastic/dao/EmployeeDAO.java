@@ -3,6 +3,8 @@ package com.boombastic.dao;
 import com.boombastic.config.DBConnection;
 import com.boombastic.model.Department;
 import com.boombastic.model.Employee;
+import com.boombastic.model.Recruitment;
+import com.boombastic.model.TypeRecruitment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,6 +42,30 @@ public class EmployeeDAO {
         }
 
         return employeeList;
+    }
+
+    public Employee getEmployeeById(int id) {
+        Employee employee = new Employee();
+        String query = "SELECT idEmpleado, numeroDui, nombrePersona, usuario, numeroTelefono, correoInstitucional, fechaNacimiento " +
+                "FROM empleados WHERE idEmpleado = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                employee.setId(rs.getInt("idEmpleado"));
+                employee.setDui(rs.getString("numeroDui"));
+                employee.setEmp_name(rs.getString("nombrePersona"));
+                employee.setUsername(rs.getString("usuario"));
+                employee.setPhone_number(rs.getString("numeroTelefono"));
+                employee.setEmail(rs.getString("correoInstitucional"));
+                employee.setBirthday(rs.getDate("fechaNacimiento"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
     }
 
     public void save(Employee employee) {

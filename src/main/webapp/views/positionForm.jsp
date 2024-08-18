@@ -3,24 +3,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Nuevo Departamento</title>
+    <title>Nuevo Cargo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 <div class="container">
-    <h2>Crear Nuevo Departamento</h2>
-    <form action="employees" method="post">
+    <h2>Crear Nuevo Cargo</h2>
+    <form action="positions" method="post">
         <input type="hidden" name="action" value="save">
 
         <div class="form-group">
-            <label for="deptName">Nombre de departamento:</label>
-            <input type="text" class="form-control" id="deptName" name="deptName" required>
+            <label for="cargo">Nombre del cargo:</label>
+            <input type="text" class="form-control" id="cargo" name="cargo" required>
         </div>
 
         <div class="form-group">
-            <label for="deptDescription">Descripción del departamento:</label>
-            <input type="text" class="form-control" id="deptDescription" name="deptDescription" required>
+            <label for="descCargo">Descripción del cargo:</label>
+            <input type="text" class="form-control" id="descCargo" name="descCargo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="jefatura">¿Está en posición de liderazgo?</label>
+            <select id="jefatura" class="form-control" name="jefatura">
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>

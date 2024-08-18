@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crear Nueva Contratación</title>
+    <title>Actualizar Contratación</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 <div class="container">
-    <h2>Crear Nueva Contratación</h2>
+    <h2>Actualizar La Contratación</h2>
     <form action="recruitment" method="post">
         <input type="hidden" name="action" value="update">
         <input type="hidden" name="id" value="${recruitment.id}">

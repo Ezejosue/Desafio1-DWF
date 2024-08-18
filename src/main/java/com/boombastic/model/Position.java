@@ -5,7 +5,7 @@ public class Position {
     private int id;
     private String position;
     private String position_description;
-    private String leadership;
+    private int leadership;
 
     public int getId() {
         return id;
@@ -31,11 +31,11 @@ public class Position {
         this.position_description = position_description;
     }
 
-    public String getLeadership() {
+    public int getLeadership() {
         return leadership;
     }
 
-    public void setLeadership(String leadership) {
+    public void setLeadership(int leadership) {
         this.leadership = leadership;
     }
 }

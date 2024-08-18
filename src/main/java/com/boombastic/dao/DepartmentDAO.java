@@ -2,6 +2,7 @@ package com.boombastic.dao;
 
 import com.boombastic.config.DBConnection;
 import com.boombastic.model.Department;
+import com.boombastic.model.Employee;
 import com.boombastic.model.Recruitment;
 
 import java.sql.Connection;
@@ -38,6 +39,26 @@ public class DepartmentDAO {
         return departmentList;
     }
 
+    public Department getDepartmentById(int id) {
+        Department department = new Department();
+        String query = "SELECT idDepartamento, nombreDepartamento, descripcionDepartamento " +
+                "FROM departamento WHERE idDepartamento = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                department.setId(rs.getInt("idDepartamento"));
+                department.setDept_name(rs.getString("nombreDepartamento"));
+                department.setDept_description(rs.getString("descripcionDepartamento"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return department;
+    }
+
     public void save(Department department) {
         String sql = "INSERT INTO departamento (nombreDepartamento, descripcionDepartamento) VALUES (?, ?);";
 
@@ -47,6 +68,23 @@ public class DepartmentDAO {
             // Aquí necesitas adaptar los parámetros para que se correspondan con los IDs
             stmt.setString(1, department.getDept_name());
             stmt.setString(2, department.getDept_description());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Department department) {
+        String sql = "UPDATE departamento SET nombreDepartamento = ?, descripcionDepartamento = ? " +
+                "WHERE idDepartamento = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, department.getDept_name());
+            stmt.setString(2, department.getDept_description());
+            stmt.setInt(3, department.getId());
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

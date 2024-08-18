@@ -29,7 +29,7 @@ public class PositionDAO {
                 posi.setId(rs.getInt("idCargo"));
                 posi.setPosition(rs.getString("cargo"));
                 posi.setPosition_description(rs.getString("descripcionCargo"));
-                posi.setLeadership(rs.getString("jefatura"));
+                posi.setLeadership(rs.getInt("jefatura"));
                 positionList.add(posi);
             }
         } catch (Exception e) {
@@ -37,6 +37,27 @@ public class PositionDAO {
         }
 
         return positionList;
+    }
+
+    public Position getPositionById(int id) {
+        Position position = new Position();
+        String query = "SELECT idCargo, cargo, descripcionCargo, jefatura FROM cargos " +
+                "WHERE idCargo = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                position.setId(rs.getInt("idCargo"));
+                position.setPosition(rs.getString("cargo"));
+                position.setPosition_description(rs.getString("descripcionCargo"));
+                position.setLeadership(rs.getInt("jefatura"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return position;
     }
 
     public void save(Position position) {
@@ -48,7 +69,25 @@ public class PositionDAO {
             // Aquí necesitas adaptar los parámetros para que se correspondan con los IDs
             stmt.setString(1, position.getPosition());
             stmt.setString(2, position.getPosition_description());
-            stmt.setString(3, position.getLeadership());
+            stmt.setInt(3, position.getLeadership());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Position position) {
+        String sql = "UPDATE cargos SET cargo = ?, descripcionCargo = ?, jefatura = ? " +
+                "WHERE idCargo = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, position.getPosition());
+            stmt.setString(2, position.getPosition_description());
+            stmt.setInt(3, position.getLeadership());
+            stmt.setInt(4, position.getId());
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

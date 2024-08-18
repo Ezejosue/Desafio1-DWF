@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Departamentos</title>
+    <title>Lista de Empleados</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -13,14 +13,14 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col text-center">
-                <h1>Lista de departamentos</h1>
+                <h1>Lista de empleados</h1>
             </div>
         </div>
 
         <div class="row my-4">
             <div class="col text-center">
-                <a href="departments?action=new" class="btn btn-success">
-                    <i class="bi bi-plus-square-fill"></i> Añadir nuevo departamento
+                <a href="employees?action=new" class="btn btn-success">
+                    <i class="bi bi-plus-square-fill"></i> Añadir nuevo empleado
                 </a>
             </div>
         </div>
@@ -29,20 +29,27 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre departamento</th>
-                <th>Descripción departamento</th>
-                <th>Acciones</th>
+                <th># DUI</th>
+                <th>Nombre</th>
+                <th>Username</th>
+                <th># Teléfono</th>
+                <th>E-Mail</th>
+                <th>Fecha nacimiento</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="dept" items="${departmentsList}">
+            <c:forEach var="emp" items="${employeeList}">
                 <tr>
-                    <td>${dept.id}</td>
-                    <td>${dept.dept_name}</td>
-                    <td>${dept.dept_description}</td>
+                    <td>${emp.id}</td>
+                    <td>${emp.dui}</td>
+                    <td>${emp.emp_name}</td>
+                    <td>${emp.username}</td>
+                    <td>${emp.phone_number}</td>
+                    <td>${emp.email}</td>
+                    <td>${emp.birthday}</td>
                     <td>
-                        <a href="departments?action=edit&id=${dept.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="${dept.id}"><i class="bi bi-trash-fill"></i></a>
+                        <a href="employees?action=edit&id=${emp.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                        <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="${emp.id}"><i class="bi bi-trash-fill"></i></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -60,7 +67,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ¿Está seguro que quiere eliminar este departamento?
+                    ¿Está seguro que quiere eliminar este empleado?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -80,10 +87,10 @@
 
         // Maneja el click del botón
         $('.delete-btn').on('click', function() {
-            // Obtiene la id del atributo data-id y construye la URL para eliminar el departamento
-            var deptId = $(this).data('id');
+            // Obtiene la id del atributo data-id y construye la URL para eliminar el empleado
+            var empId = $(this).data('id');
             console.log("ID: "+$(this).data('id'))
-            deleteUrl = 'departments?action=delete&id=' + deptId;
+            deleteUrl = 'employees?action=delete&id=' + empId;
 
             // Muestra el modal de confirmación
             $('#confirmModal').modal('show');
