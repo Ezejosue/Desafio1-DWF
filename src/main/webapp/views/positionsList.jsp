@@ -11,14 +11,12 @@
 <div class="container">
 
     <div class="container mt-5">
-        <!-- Centered Title -->
         <div class="row">
             <div class="col text-center">
                 <h1>Lista de posiciones</h1>
             </div>
         </div>
 
-        <!-- Centered Add Button -->
         <div class="row my-4">
             <div class="col text-center">
                 <a href="departments?action=new" class="btn btn-success">
@@ -31,31 +29,74 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre departamento</th>
-                <th>Descripción departamento</th>
-                <th>Acciones</th>
+                <th>Posición</th>
+                <th>Descripción posición</th>
+                <th>Jefatura</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="dept" items="${departmentsList}">
+            <c:forEach var="pos" items="${positionList}">
                 <tr>
-                    <td>${dept.id}</td>
-                    <td>${dept.dept_name}</td>
-                    <td>${dept.dept_description}</td>
+                    <td>${pos.id}</td>
+                    <td>${pos.position}</td>
+                    <td>${pos.position_description}</td>
+                    <td>${pos.leadership}</td>
                     <td>
-                        <a href="DepartmentController?action=edit&id=${dept.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                        <a href="DepartmentController?action=delete&id=${dept.id}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        <a href="positions?action=edit&id=${pos.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                        <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="${pos.id}"><i class="bi bi-trash-fill"></i></a>
                     </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro que quiere eliminar este cargo?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var deleteUrl;
+
+        // Handle delete button click
+        $('.delete-btn').on('click', function() {
+            // Get the ID from the data-id attribute and build the delete URL
+            var posId = $(this).data('id');
+            console.log("ID: "+$(this).data('id'))
+            deleteUrl = 'positions?action=delete&id=' + posId;
+
+            // Show the confirmation modal
+            $('#confirmModal').modal('show');
+        });
+
+        // Handle confirmation button click in the modal
+        $('#confirmDelete').on('click', function() {
+            // Redirect to the delete URL
+            window.location.href = deleteUrl;
+        });
+    });
+</script>
 </body>
 </html>
 
