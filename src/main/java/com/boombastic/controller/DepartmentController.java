@@ -3,8 +3,6 @@ package com.boombastic.controller;
 import com.boombastic.config.DBConnection;
 import com.boombastic.dao.DepartmentDAO;
 import com.boombastic.model.Department;
-import com.boombastic.model.Recruitment;
-import com.boombastic.model.TypeRecruitment;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
