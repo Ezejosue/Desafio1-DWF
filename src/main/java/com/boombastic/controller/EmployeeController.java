@@ -124,7 +124,6 @@ public class EmployeeController extends HttpServlet{
         employee.setEmail(email);
         employee.setBirthday(birthday);
 
-        // Guardar el empleado (puedes implementar la lógica en el DAO)
         employeeDAO.save(employee);
 
         // Redirigir a la lista de contrataciones
@@ -150,34 +149,27 @@ public class EmployeeController extends HttpServlet{
             throws ServletException, IOException {
         // Recoge los datos del formulario
         int id = Integer.parseInt(request.getParameter("id"));
-        String deptName = request.getParameter("deptName");
-        String employeeName = request.getParameter("employeeName");
-        String positionName = request.getParameter("positionName");
-        String typeRecruitment = request.getParameter("typeRecr");
-        String date_recr = request.getParameter("date_recr");
-        double salary = Double.parseDouble(request.getParameter("salary"));
-        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        String dui = request.getParameter("dui");
+        String empName = request.getParameter("employeeName");
+        String username = request.getParameter("username");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        Date birthday = Date.valueOf(request.getParameter("birthday"));
 
         // Crea un nuevo objeto Recruitment
-        Recruitment recruitment = new Recruitment();
-        recruitment.setId(id);
-        recruitment.setDeptName(deptName);
-        recruitment.setEmployeeName(employeeName);
-        recruitment.setPositionName(positionName);
-        recruitment.setDate_recr(date_recr);
-        recruitment.setSalary(salary);
-        recruitment.setStatus(status);
+        Employee employee = new Employee();
+        employee.setId(id);
+        employee.setDui(dui);
+        employee.setEmp_name(empName);
+        employee.setUsername(username);
+        employee.setPhone_number(phoneNumber);
+        employee.setEmail(email);
+        employee.setBirthday(birthday);
 
-        TypeRecruitment typeRecruitmentObj = new TypeRecruitment();
-        typeRecruitmentObj.setType_recr(typeRecruitment);
-        recruitment.setTypeRecruitment(typeRecruitmentObj);
-
-        System.out.println(recruitment);
-        // Guardar la contratación (puedes implementar la lógica en el DAO)
-        //recruitmentDAO.update(recruitment);
+        employeeDAO.update(employee);
 
         // Redirigir a la lista de contrataciones
-        response.sendRedirect("recruitment?action=list");
+        response.sendRedirect("employees?action=list");
     }
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -192,8 +184,14 @@ public class EmployeeController extends HttpServlet{
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-        doGet(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 }

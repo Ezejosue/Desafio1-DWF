@@ -11,19 +11,16 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Brand or Home Link -->
     <a class="navbar-brand" href="#">Home</a>
 
-    <!-- Toggler/collapsible Button for mobile view -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Cargos</a>
+                <a class="nav-link" href="positions">Cargos</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="recruitment">Contrataciones</a>
@@ -32,7 +29,7 @@
                 <a class="nav-link" href="departments">Departamentos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Empleados</a>
+                <a class="nav-link" href="employees">Empleados</a>
             </li>
         </ul>
     </div>
@@ -41,7 +38,7 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <a href="#" class="grid-item">
+            <a href="positions" class="grid-item">
                 Cargos
             </a>
         </div>
@@ -59,7 +56,7 @@
             </a>
         </div>
         <div class="col-md-5">
-            <a href="#" class="grid-item">
+            <a href="employees" class="grid-item">
                 Empleados
             </a>
         </div>

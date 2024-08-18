@@ -40,14 +40,19 @@
         </div>
 
         <div class="form-group">
-            <label for="birthday">Fecha de nacimiento:</label>
-            <div class="input-group date" id="birthdayPicker">
-                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
-                <div class="input-group-append">
-                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                </div>
-            </div>
+            <label for="birthday">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" required>
         </div>
+
+<%--        <div class="form-group">--%>
+<%--            <label for="birthday">Fecha de nacimiento:</label>--%>
+<%--            <div class="input-group date" id="birthdayPicker">--%>
+<%--                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD">--%>
+<%--                <div class="input-group-append">--%>
+<%--                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="employees?action=list" class="btn btn-secondary">Cancelar</a>

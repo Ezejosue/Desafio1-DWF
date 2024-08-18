@@ -106,7 +106,7 @@ public class PositionsController extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/positionsForm.jsp").forward(request, response);
+        request.getRequestDispatcher("views/positionForm.jsp").forward(request, response);
     }
 
     private void savePositions(HttpServletRequest request, HttpServletResponse response)
@@ -173,8 +173,14 @@ public class PositionsController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-        doGet(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 }

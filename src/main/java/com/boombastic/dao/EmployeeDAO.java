@@ -124,7 +124,7 @@ public class EmployeeDAO {
     * table. The method takes an `Employee` object as a parameter, which contains the following
     * attributes:
     */
-    public void updateEmployee(Employee employee) {
+    public void update(Employee employee) {
         String sql = "UPDATE empleados SET numeroDui = ?, nombrePersona = ?, usuario = ?, numeroTelefono = ?, correoInstitucional = ?, fechaNacimiento = ? " +
                 "WHERE empleados.idEmpleado = ?;";
 
@@ -139,6 +139,7 @@ public class EmployeeDAO {
             stmt.setDate(6, employee.getBirthday());
             stmt.setInt(7, employee.getId());
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

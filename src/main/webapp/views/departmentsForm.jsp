@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <h2>Crear Nuevo Departamento</h2>
-    <form action="employees" method="post">
+    <form action="departments" method="post">
         <input type="hidden" name="action" value="save">
 
         <div class="form-group">

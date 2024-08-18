@@ -8,7 +8,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<div class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Home</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="positions">Cargos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="recruitment">Contrataciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="departments">Departamentos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="employees">Empleados</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
 
     <div class="container mt-5">
         <div class="row">
@@ -19,7 +45,7 @@
 
         <div class="row my-4">
             <div class="col text-center">
-                <a href="departments?action=new" class="btn btn-success">
+                <a href="positions?action=new" class="btn btn-success">
                     <i class="bi bi-plus-square-fill"></i> Añadir nueva posición
                 </a>
             </div>
@@ -35,12 +61,22 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="pos" items="${positionList}">
+            <c:forEach var="pos" items="${positionsList}">
                 <tr>
                     <td>${pos.id}</td>
                     <td>${pos.position}</td>
                     <td>${pos.position_description}</td>
-                    <td>${pos.leadership}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${pos.leadership == 1}">
+                                Sí
+                            </c:when>
+                            <c:otherwise>
+                                No
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+
                     <td>
                         <a href="positions?action=edit&id=${pos.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                         <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="${pos.id}"><i class="bi bi-trash-fill"></i></a>

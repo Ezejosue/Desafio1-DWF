@@ -16,16 +16,16 @@
 
         <div class="form-group">
             <label for="deptName">Nombre de departamento:</label>
-            <input type="date" class="form-control" id="deptName" name="deptName" required>
+            <input type="text" class="form-control" id="deptName" name="deptName" value="${department.dept_name}" required>
         </div>
 
         <div class="form-group">
             <label for="deptDescription">Descripción del departamento:</label>
-            <input type="date" class="form-control" id="deptDescription" name="deptDescription" required>
+            <input type="text" class="form-control" id="deptDescription" name="deptDescription" value="${department.dept_description}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="recruitment?action=list" class="btn btn-secondary">Cancelar</a>
+        <a href="departments?action=list" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 </body>

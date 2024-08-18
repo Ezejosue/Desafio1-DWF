@@ -3,9 +3,6 @@ package com.boombastic.controller;
 import com.boombastic.config.DBConnection;
 import com.boombastic.dao.DepartmentDAO;
 import com.boombastic.model.Department;
-import com.boombastic.model.Position;
-import com.boombastic.model.Recruitment;
-import com.boombastic.model.TypeRecruitment;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -77,7 +74,7 @@ public class DepartmentController extends HttpServlet {
                 listDepartments(request, response);
                 break;
             case "edit":
-                setEditRecruitmentValues(request, response);
+                setEditDepartmentValues(request, response);
                 break;
             case "update":
                 updateDepartment(request, response);
@@ -128,7 +125,7 @@ public class DepartmentController extends HttpServlet {
         response.sendRedirect("departments?action=list");
     }
 
-    private void setEditRecruitmentValues(HttpServletRequest request, HttpServletResponse response)
+    private void setEditDepartmentValues(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Recoge el ID del departamento a editar
         int id = Integer.parseInt(request.getParameter("id"));
@@ -160,7 +157,7 @@ public class DepartmentController extends HttpServlet {
         departmentDao.update(department);
 
         // Redirigir a la lista de contrataciones
-        response.sendRedirect("recruitment?action=list");
+        response.sendRedirect("departments?action=list");
     }
 
     private void deleteDepartment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -170,8 +167,14 @@ public class DepartmentController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-        doGet(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 }
