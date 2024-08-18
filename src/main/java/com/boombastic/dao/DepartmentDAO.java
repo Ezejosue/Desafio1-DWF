@@ -12,8 +12,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The DepartmentDAO class provides methods for interacting with a database table storing department
+ * information, including retrieving all departments, getting a department by ID, saving a new
+ * department, updating an existing department, and deleting a department by ID.
+ */
 public class DepartmentDAO {
 
+   /**
+    * This Java function retrieves all departments from a database table and returns them as a list of
+    * Department objects.
+    * 
+    * @return This method returns a List of Department objects containing information about all
+    * departments retrieved from the database table "departamento".
+    */
     public List<Department> getAllDepartments() {
         List<Department> departmentList = new ArrayList<>();
 
@@ -39,6 +51,16 @@ public class DepartmentDAO {
         return departmentList;
     }
 
+   /**
+    * This Java function retrieves a department from a database based on the provided department ID.
+    * 
+    * @param id The `id` parameter in the `getDepartmentById` method is an integer value representing
+    * the unique identifier of the department that you want to retrieve from the database. This method
+    * fetches department details such as department ID, name, and description based on the provided
+    * `id`.
+    * @return The method `getDepartmentById` is returning a `Department` object populated with data
+    * fetched from the database based on the provided `id`.
+    */
     public Department getDepartmentById(int id) {
         Department department = new Department();
         String query = "SELECT idDepartamento, nombreDepartamento, descripcionDepartamento " +
@@ -59,6 +81,12 @@ public class DepartmentDAO {
         return department;
     }
 
+   /**
+    * The `save` method inserts a new department into a database table using the department's name and
+    * description as parameters.
+    * 
+    * @param department - dept_name: The name of the department to be saved.
+    */
     public void save(Department department) {
         String sql = "INSERT INTO departamento (nombreDepartamento, descripcionDepartamento) VALUES (?, ?);";
 
@@ -74,6 +102,14 @@ public class DepartmentDAO {
         }
     }
 
+   /**
+    * The `update` method updates a Department object in the database by setting the department name
+    * and description based on the provided ID.
+    * 
+    * @param department The `department` parameter in the `update` method represents an object of the
+    * `Department` class. It contains information about a department such as its name, description, and
+    * ID.
+    */
     public void update(Department department) {
         String sql = "UPDATE departamento SET nombreDepartamento = ?, descripcionDepartamento = ? " +
                 "WHERE idDepartamento = ?";
@@ -91,6 +127,14 @@ public class DepartmentDAO {
         }
     }
 
+   /**
+    * The `delete` method deletes a record from the "departamento" table based on the provided ID.
+    * 
+    * @param id The `id` parameter in the `delete` method represents the unique identifier of the
+    * record that you want to delete from the `departamento` table in the database. This method
+    * prepares a SQL query to delete a record from the table where the `idDepartamento` column matches
+    * the provided `id
+    */
     public void delete(int id) {
         String sql = "DELETE FROM departamento WHERE idDepartamento = ?";
 

@@ -13,7 +13,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The `EmployeeDAO` class provides methods for interacting with an employee database table including
+ * retrieving, saving, updating, and deleting employee records.
+ */
 public class EmployeeDAO {
+/**
+ * This Java function retrieves all employees from a database table and returns them as a list of
+ * Employee objects.
+ * 
+ * @return The `getAllEmployees` method returns a List of Employee objects containing information
+ * retrieved from a database table named "empleados".
+ */
 
     public List<Employee> getAllEmployees() {
         List<Employee> employeeList = new ArrayList<>();
@@ -44,6 +55,15 @@ public class EmployeeDAO {
         return employeeList;
     }
 
+    /**
+     * The function retrieves an employee's information from a database based on their ID.
+     * 
+     * @param id The `getEmployeeById` method retrieves an employee's information from a database based
+     * on the provided employee ID. The method constructs a SQL query to select specific columns from
+     * the `empleados` table where the `idEmpleado` matches the given ID parameter.
+     * @return An Employee object with the details fetched from the database for the employee with the
+     * specified ID is being returned.
+     */
     public Employee getEmployeeById(int id) {
         Employee employee = new Employee();
         String query = "SELECT idEmpleado, numeroDui, nombrePersona, usuario, numeroTelefono, correoInstitucional, fechaNacimiento " +
@@ -68,6 +88,14 @@ public class EmployeeDAO {
         return employee;
     }
 
+/**
+ * The `save` method inserts employee data into a database table using prepared statements in Java.
+ * 
+ * @param employee Based on the code snippet provided, the `save` method is responsible for saving an
+ * `Employee` object into a database table named `empleados`. The method takes an `Employee` object as
+ * a parameter and extracts various attributes from it to populate the corresponding columns in the
+ * database table.
+ */
     public void save(Employee employee) {
         String sql = "INSERT INTO empleados (numeroDui, nombrePersona, usuario, numeroTelefono, correoInstitucional, fechaNacimiento) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
@@ -88,6 +116,14 @@ public class EmployeeDAO {
         }
     }
 
+   /**
+    * The `updateEmployee` method updates employee information in a database using SQL UPDATE
+    * statement.
+    * 
+    * @param employee The `updateEmployee` method is used to update an employee record in a database
+    * table. The method takes an `Employee` object as a parameter, which contains the following
+    * attributes:
+    */
     public void updateEmployee(Employee employee) {
         String sql = "UPDATE empleados SET numeroDui = ?, nombrePersona = ?, usuario = ?, numeroTelefono = ?, correoInstitucional = ?, fechaNacimiento = ? " +
                 "WHERE empleados.idEmpleado = ?;";
@@ -108,6 +144,13 @@ public class EmployeeDAO {
         }
     }
 
+ /**
+  * The `delete` function deletes a record from the `empleados` table based on the provided `id`.
+  * 
+  * @param id The `delete` method is used to delete a record from the `empleados` table in a database
+  * based on the `idEmpleado` field matching the provided `id` parameter. The `id` parameter is the
+  * unique identifier of the record that needs to be deleted.
+  */
     public void delete(int id) {
         String sql = "DELETE FROM empleados WHERE idEmpleado = ?";
 
