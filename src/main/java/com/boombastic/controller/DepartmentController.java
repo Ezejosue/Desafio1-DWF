@@ -33,7 +33,9 @@ public class DepartmentController extends HttpServlet {
         } else if (action.equals("edit")) {
 
         } else if (action.equals("delete")) {
-
+            deleteDepartment(request, response);
+        }  else if (action.equals("list")) {
+            listDepartments(request, response);
         }
     }
 
@@ -53,31 +55,24 @@ public class DepartmentController extends HttpServlet {
             throws ServletException, IOException {
         // Recoge los datos del formulario
         String deptName = request.getParameter("deptName");
-        String employeeName = request.getParameter("employeeName");
-        String positionName = request.getParameter("positionName");
-        String typeRecruitment = request.getParameter("typeRecruitment");
-        String date_recr = request.getParameter("date_recr");
-        double salary = Double.parseDouble(request.getParameter("salary"));
-        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        String deptDescription = request.getParameter("deptDescription");
 
         // Crea un nuevo objeto Recruitment
-        Recruitment recruitment = new Recruitment();
-        recruitment.setDeptName(deptName);
-        recruitment.setEmployeeName(employeeName);
-        recruitment.setPositionName(positionName);
-        recruitment.setDate_recr(date_recr);
-        recruitment.setSalary(salary);
-        recruitment.setStatus(status);
-
-        TypeRecruitment typeRecruitmentObj = new TypeRecruitment();
-        typeRecruitmentObj.setType_recr(typeRecruitment);
-        recruitment.setTypeRecruitment(typeRecruitmentObj);
+        Department dept = new Department();
+        dept.setDept_name(deptName);
+        dept.setDept_description(deptDescription);
 
         // Guardar la contratación (puedes implementar la lógica en el DAO)
-//        departmentDao.save(recruitment);
+        departmentDao.save(dept);
 
         // Redirigir a la lista de contrataciones
-        response.sendRedirect("recruitment?action=list");
+        response.sendRedirect("departments?action=list");
+    }
+
+    private void deleteDepartment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        departmentDao.delete(id);
+        response.sendRedirect("departments?action=list");
     }
 
     @Override

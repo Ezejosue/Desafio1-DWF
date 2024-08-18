@@ -22,7 +22,7 @@ public class DBConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr_system?useSSL=false", "root", "12345");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr_system?useSSL=false", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }

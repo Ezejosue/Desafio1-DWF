@@ -7,6 +7,7 @@ import com.boombastic.model.Position;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +37,33 @@ public class PositionDAO {
         }
 
         return positionList;
+    }
+
+    public void save(Position position) {
+        String sql = "INSERT INTO cargos (cargo, descripcionCargo, jefatura) VALUES (?, ?, ?);";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Aquí necesitas adaptar los parámetros para que se correspondan con los IDs
+            stmt.setString(1, position.getPosition());
+            stmt.setString(2, position.getPosition_description());
+            stmt.setString(3, position.getLeadership());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM cargos WHERE idCargo = ?";
+
+        try (Connection conn = new DBConnection().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
