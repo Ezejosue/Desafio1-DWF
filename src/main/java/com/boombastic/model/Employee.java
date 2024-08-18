@@ -2,6 +2,9 @@ package com.boombastic.model;
 
 import java.sql.Date;
 
+/**
+ * The Employee class defines attributes and methods for managing employee information.
+ */
 public class Employee {
 
     private int id;

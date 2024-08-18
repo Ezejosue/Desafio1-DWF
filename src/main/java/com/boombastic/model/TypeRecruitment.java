@@ -1,5 +1,8 @@
 package com.boombastic.model;
 
+/**
+ * This Java class represents a TypeRecruitment entity with id and type_recr attributes.
+ */
 public class TypeRecruitment {
 
     private int id;

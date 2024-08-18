@@ -1,5 +1,9 @@
 package com.boombastic.model;
 
+/**
+ * This Java class represents a recruitment entity with various attributes such as ID, department name,
+ * employee name, position name, recruitment type, date of recruitment, salary, and status.
+ */
 public class Recruitment {
 
     private int id;

@@ -1,5 +1,8 @@
 package com.boombastic.model;
 
+/**
+ * The Department class represents a department with an id, name, and description.
+ */
 public class Department {
 
     private int id;

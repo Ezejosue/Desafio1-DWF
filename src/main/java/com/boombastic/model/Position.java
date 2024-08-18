@@ -1,5 +1,9 @@
 package com.boombastic.model;
 
+/**
+ * The `Position` class represents a position within an organization with attributes such as id,
+ * position name, position description, and leadership level.
+ */
 public class Position {
 
     private int id;
