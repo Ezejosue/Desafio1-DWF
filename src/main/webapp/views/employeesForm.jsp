@@ -16,7 +16,14 @@
 
         <div class="form-group">
             <label for="dui">DUI:</label>
-            <input type="text" class="form-control" id="dui" name="dui" required>
+            <input type="text"
+                   class="form-control"
+                   id="dui"
+                   name="dui"
+                   required
+                   pattern="\d{8}-\d{1}"
+                   maxlength="10"
+                   placeholder="XXXXXXXX-X">
         </div>
 
         <div class="form-group">
@@ -31,7 +38,14 @@
 
         <div class="form-group">
             <label for="phoneNumber">Número de teléfono:</label>
-            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+            <input type="text"
+                   class="form-control"
+                   id="phoneNumber"
+                   name="phoneNumber"
+                   required
+                   pattern="\d{4}-\d{4}"
+                   maxlength="9"
+                   placeholder="XXXX-XXXX">
         </div>
 
         <div class="form-group">
@@ -68,6 +82,38 @@
             format: 'yyyy-mm-dd',
             autoclose: true,
             todayHighlight: true
+        });
+    });
+
+    // Validación DUI
+    $(document).ready(function(){
+        $('#dui').on('keypress', function(e) {
+            // Permite solo números
+            if (!/^\d$/.test(e.key)) {
+                e.preventDefault();
+            }
+        }).on('input', function() {
+            var input = $(this).val().replace(/\D/g, '');  // Remueve todos los caracteres no numéricos que se hayan colado
+            if (input.length > 8) {
+                input = input.slice(0, 8) + '-' + input.slice(8, 9);
+            }
+            $(this).val(input);
+        });
+    });
+
+    // Validación número de teléfono
+    $(document).ready(function(){
+        $('#phoneNumber').on('keypress', function(e) {
+            // Permite solo números
+            if (!/^\d$/.test(e.key)) {
+                e.preventDefault();
+            }
+        }).on('input', function() {
+            var input = $(this).val().replace(/\D/g, '');  // Remueve todos los caracteres no numéricos que se hayan colado
+            if (input.length > 4) {
+                input = input.slice(0, 4) + '-' + input.slice(4, 8);
+            }
+            $(this).val(input);
         });
     });
 </script>

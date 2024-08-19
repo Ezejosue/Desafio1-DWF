@@ -77,8 +77,6 @@
                     <td>
                         <a href="recruitment?action=edit&employeeName=${recruitment.employeeName}&id=${recruitment.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                         <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="${recruitment.id}"><i class="bi bi-trash-fill"></i></a>
-                        <!-- <a href="recruitment?action=delete&id= ${recruitment.id}" class="btn btn-danger"
-                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta contratación?');">Eliminar</a> -->
                     </td>
                 </tr>
             </c:forEach>
